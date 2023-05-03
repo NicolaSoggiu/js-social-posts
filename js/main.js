@@ -80,7 +80,7 @@ likeBtns.forEach((btn) => {
     let photoLikes = document.querySelector(".js-likes-counter");
     if (btn.classList.contains("green")) {
       photoLikes.innerHTML++;
-      arrLikes.push(posts.id);
+      arrLikes.push(`${el.id}`);
       console.log("arrLikes", arrLikes);
     } else if (!btn.classList.contains("green")) {
       photoLikes.innerHTML--;

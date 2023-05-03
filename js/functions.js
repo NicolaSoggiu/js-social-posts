@@ -11,6 +11,7 @@ function printPost(posts, socialPost) {
 
 // FUNCTION TO CREATE THE POST
 function renderPost(el) {
+  const italianDate = formatItalianDate(el.created);
   return `
     <div class="post">
       <div class="post__header">
@@ -20,7 +21,7 @@ function renderPost(el) {
           </div>
           <div class="post-meta__data">
             <div class="post-meta__author">${el.author.name}</div>
-            <div class="post-meta__time">${el.created}</div>
+            <div class="post-meta__time">${italianDate}</div>
           </div>
         </div>
       </div>
@@ -51,4 +52,13 @@ function renderPost(el) {
         </div>
       </div>
     </div>`;
+}
+
+// FUNCTION TO CONVERT THE DATA
+function formatItalianDate(dateString) {
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
 }
