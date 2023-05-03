@@ -68,13 +68,17 @@ const socialPost = document.querySelector("#container");
 // CALL THE FUNCTION TO CREATE THE POST IN THE HTML
 printPost(posts, socialPost);
 
-// ADD COLOR GREEN WHEN CLICK THE BUTTON
+// ADD COLOR GREEN WHEN CLICK THE BUTTON AND UPDATE THE COUNTER LIKES
 let likeBtns = document.querySelectorAll(".like-button.js-like-button");
-console.log("likeBtns", likeBtns);
 
-likeBtns.forEach((btn, index) => {
+likeBtns.forEach((btn) => {
   btn.addEventListener("click", function (e) {
     btn.classList.toggle("green");
-    console.log("e", index);
+    let photoLikes = document.querySelector(".js-likes-counter");
+    if (btn.classList.contains("green")) {
+      photoLikes.innerHTML++;
+    } else if (!btn.classList.contains("green")) {
+      photoLikes.innerHTML--;
+    }
   });
 });
