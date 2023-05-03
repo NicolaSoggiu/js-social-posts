@@ -25,12 +25,10 @@ function renderPost(el) {
         </div>
       </div>
       <div class="post__text">
-        Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima
-        iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil
-        ullam aut alias.
+        ${el.content}
       </div>
       <div class="post__image">
-      <img class="profile-pic" src="${el.media}" alt="Phil Mangione">
+      <img class="post__imgae" src="${el.media}">
       </div>
       <div class="post__footer">
         <div class="likes js-likes">
