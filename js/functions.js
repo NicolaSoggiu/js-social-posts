@@ -45,7 +45,7 @@ function renderPost(el) {
             Piace a
             <b id="like-counter-1" class="js-likes-counter">
               80
-            </b>{" "}
+            </b>
             persone
           </div>
         </div>

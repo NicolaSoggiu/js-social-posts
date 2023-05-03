@@ -1,5 +1,4 @@
 // ARRAY OF ObJECT
-
 const posts = [
   {
     id: 1,
@@ -68,3 +67,14 @@ const socialPost = document.querySelector("#container");
 
 // CALL THE FUNCTION TO CREATE THE POST IN THE HTML
 printPost(posts, socialPost);
+
+// ADD COLOR GREEN WHEN CLICK THE BUTTON
+let likeBtns = document.querySelectorAll(".like-button.js-like-button");
+console.log("likeBtns", likeBtns);
+
+likeBtns.forEach((btn, index) => {
+  btn.addEventListener("click", function (e) {
+    btn.classList.toggle("green");
+    console.log("e", index);
+  });
+});
