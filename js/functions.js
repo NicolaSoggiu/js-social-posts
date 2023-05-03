@@ -12,12 +12,18 @@ function printPost(posts, socialPost) {
 // FUNCTION TO CREATE THE POST
 function renderPost(el) {
   const italianDate = formatItalianDate(el.created);
+  let authorImage = "";
+  if (el.author.image) {
+    authorImage = `src="${el.author.image}"`;
+  } else {
+    authorImage = `data-initials="${getAuthorInitials(el.author.name)}"`;
+  }
   return `
     <div class="post">
       <div class="post__header">
         <div class="post-meta">
           <div class="post-meta__icon">
-            <img class="profile-pic" src="${el.author.image}" alt="Phil Mangione">
+            <img class="profile-pic" ${authorImage} alt="${el.author.name}">
           </div>
           <div class="post-meta__data">
             <div class="post-meta__author">${el.author.name}</div>
@@ -52,6 +58,16 @@ function renderPost(el) {
         </div>
       </div>
     </div>`;
+}
+
+// FUNCTION TO ADD THE INITIALS INSTEAD OF THE PHOTO
+// TO FIX
+function getAuthorInitials(name) {
+  let initials = "";
+  name.split(" ").forEach((word) => {
+    initials += word.charAt(0);
+  });
+  return initials;
 }
 
 // FUNCTION TO CONVERT THE DATA
