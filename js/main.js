@@ -70,13 +70,18 @@ printPost(posts, socialPost);
 
 // ADD COLOR GREEN WHEN CLICK THE BUTTON AND UPDATE THE COUNTER LIKES
 let likeBtns = document.querySelectorAll(".like-button.js-like-button");
+let arrLikes = [];
 
+// ADD ID IN THE ARREY AT THE CLICK
+// TO FIX
 likeBtns.forEach((btn) => {
   btn.addEventListener("click", function (e) {
     btn.classList.toggle("green");
     let photoLikes = document.querySelector(".js-likes-counter");
     if (btn.classList.contains("green")) {
       photoLikes.innerHTML++;
+      arrLikes.push(posts.id);
+      console.log("arrLikes", arrLikes);
     } else if (!btn.classList.contains("green")) {
       photoLikes.innerHTML--;
     }
