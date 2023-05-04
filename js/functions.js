@@ -11,23 +11,27 @@ function printPost(posts, socialPost) {
 
 // FUNCTION TO CREATE THE POST
 function renderPost(el) {
-  const italianDate = formatItalianDate(el.created);
   let authorImage = "";
-  if (el.author.image) {
-    authorImage = `src="${el.author.image}"`;
-  } else {
-    authorImage = `data-initials="${getAuthorInitials(el.author.name)}"`;
-  }
   return `
     <div class="post">
       <div class="post__header">
         <div class="post-meta">
           <div class="post-meta__icon">
-            <img class="profile-pic" ${authorImage} alt="${el.author.name}">
+          ${
+            el.author.image
+              ? '<img class="profile-pic" src="' +
+                el.author.image +
+                '" alt="' +
+                el.author.name +
+                '">'
+              : getNameInitials(el.author.name)
+          }
           </div>
           <div class="post-meta__data">
             <div class="post-meta__author">${el.author.name}</div>
-            <div class="post-meta__time">${italianDate}</div>
+            <div class="post-meta__time">${formatIsoToItalianDate(
+              el.created
+            )}</div>
           </div>
         </div>
       </div>
@@ -40,7 +44,7 @@ function renderPost(el) {
       <div class="post__footer">
         <div class="likes js-likes">
           <div class="likes__cta">
-            <a class="like-button js-like-button" data-postid="1">
+            <a class="like-button js-like-button" data-postid="${el.id}">
               <i
                 class="like-button__icon fas fa-thumbs-up"
                 aria-hidden="true"
@@ -50,8 +54,8 @@ function renderPost(el) {
           </div>
           <div class="likes__counter">
             Piace a
-            <b id="like-counter-1" class="js-likes-counter">
-              80
+            <b id="like-counter-${el.id}" class="js-likes-counter">
+            ${el.likes}
             </b>
             persone
           </div>
@@ -61,20 +65,13 @@ function renderPost(el) {
 }
 
 // FUNCTION TO ADD THE INITIALS INSTEAD OF THE PHOTO
-// TO FIX
-function getAuthorInitials(name) {
-  let initials = "";
-  name.split(" ").forEach((word) => {
-    initials += word.charAt(0);
-  });
-  return initials;
+function getNameInitials(name) {
+  return name
+    .split(" ")
+    .reduce((initials, namePart) => initials + namePart[0].toUpperCase(), "");
 }
 
 // FUNCTION TO CONVERT THE DATA
-function formatItalianDate(dateString) {
-  const date = new Date(dateString);
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
+function formatIsoToItalianDate(isoString) {
+  return isoString.split("-").reverse().join("/");
 }
